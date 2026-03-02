@@ -1,6 +1,6 @@
 import Pyro4
 
-file_server = Pyro4.Proxy("PYRONAME: sixseven.fileserver")
+file_server = Pyro4.Proxy("PYRONAME:sixseven.fileserver")
 test_file = "test_file.txt"
 print(f"Fetching content of {test_file} from the server...")
 

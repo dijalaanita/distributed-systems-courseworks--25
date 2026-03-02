@@ -3,7 +3,7 @@ import Pyro4
 @Pyro4.expose
 
 
-class FileServer(obj):
+class FileServer(object):
     def get_content(self, filename):
         if os.path.exists(filename):
             with open(filename, 'r') as file:
