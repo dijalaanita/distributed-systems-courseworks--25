@@ -1,9 +1,12 @@
 import Pyro4
-@Pyro4.expose
 
-class FileClient:
-    def __init__(self, server_uri):
-        self.server = Pyro4.Proxy("PYRONAME: server")
+file_server = Pyro4.Proxy("PYRONAME: sixseven.fileserver")
+test_file = "test_file.txt"
+print(f"Fetching content of {test_file} from the server...")
 
-    def fetch_content(self):
-        return self.server.get_content()
+try:
+    content = file_server.get_content(test_file)
+    print(f"Content of {test_file}:\n{content}")
+
+except Exception as e:
+    print(f"An error occurred: {e}")
