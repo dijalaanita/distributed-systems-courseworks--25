@@ -1,4 +1,6 @@
-from Pyro4
+import os
+import Pyro4
+@Pyro4.expose
 
 
 class FileServer(filename):
