@@ -2,7 +2,8 @@ import Pyro4
 
 def main():
     try:
-        auction_server = Pyro4.Proxy("PYRONAME:sixseven.auctionserver")
+        uri = input("Enter the URI of the Auction Server (e.g., PYRONAME:sixseven.auctionserver): ")
+        auction_server = Pyro4.Proxy(uri)
         auction_server._pyroBind()  # Bind to the server to check connection
         print("Connected to Auction Server.")
 
@@ -22,7 +23,7 @@ def main():
             # Implementation for getting active auctions
             try:
                 # get the list of active auctions
-                auctions = auction_server.get_active_auctions()
+                auctions = auction_server.active_auctions()
                 if not auctions:
                     print("No active auctions at the moment.")
                 else:

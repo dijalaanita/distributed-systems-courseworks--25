@@ -2,17 +2,19 @@ import Pyro4
 
 def main():
     try:
-        auction_server = Pyro4.Proxy("PYRONAME:sixseven.auctionserver")
+        uri = input("Enter the URI of the Auction Server (e.g., PYRONAME:sixseven.auctionserver): ")
+        auction_server = Pyro4.Proxy(uri)
         auction_server._pyroBind()  # Bind to the server to check connection
+        print("Connected to Auction Server.")
     except Exception as e:
         print("Error: Could not connect to Auction Server.")
         print(f"Details: {e}")
         return
     
     while True:
-        print("\n--- Auction Client ---")
-        print("1. View Active Auctions")
-        print("2. Place a Bid")
+        print("\n--- SELLER Client ---")
+        print("1. Create Auction")
+        print("2. Close Auction")
         print("3. Exit")
         choice = input("Enter your choice: ")
 
@@ -35,7 +37,7 @@ def main():
             auction_id = input("Enter auction ID to close: ")
             try:
                 #closing the auction
-                result = auction_server._auto_close_auctions(auction_id)
+                result = auction_server.auto_close_auctions(auction_id)
                 print(f"\n{result}")
             except Exception as e:
                 print("Error: Could not close auction.")
