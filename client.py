@@ -1,6 +1,8 @@
 import Pyro4
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
+
+# Load the client's private key
 try:
     with open("client_private_key.pem", "rb") as f:
         priv_key = serialization.load_pem_private_key(f.read(), password=None)
@@ -11,6 +13,7 @@ except FileNotFoundError:
 file_server = Pyro4.Proxy("PYRONAME:sixseven.fileserver")
 test_file = "test_file.txt".strip()
 
+# generate signature for the test file and convert to HEX string
 sig_bytes = priv_key.sign(
     test_file.encode(),
     padding.PSS(

@@ -21,6 +21,7 @@ class FileServer(object):
         # clean_content = content.strip()
         # print(f"Received request for content: '{clean_content}' with signature: {signature.hex()}")
         try:
+            # convert the signature from hex string back to bytes
             sig = bytes.fromhex(signature)
             self.client_public_key.verify(
                 sig,
